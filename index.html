@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <link rel="shortcut icon" type="image/png" href="favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+    <link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
+    <link rel="stylesheet" id="ppstyle" type="text/css" href="style.css">
+    <link rel='stylesheet' href='./css/animate.css' /><link rel='stylesheet' href='./css/font-awesome.min.css'/>
+    <script src="./js/jquery-2.1.0.min.js"></script>
+    <script src="./js/bootstrap.js"></script>
+    <script src="./js/blocs.js"></script>
+    
+    <title>Le Cookie Dingo de Gaga</title>
+</head>
+<body>
+<div class="page-container">
+<div id="hero-bloc" class="bloc hero bgc-white bg-grey-wash-wall d-bloc bg-repeat">
+	<div class="container bloc-sm hero-nav">
+		<nav class="navbar row">
+			<div class="navbar-header">
+			</div>
+			<div class="navbar-collapse navbar-1 collapse in">
+				<ul class="site-navigation nav navbar-nav pull-right">
+				</ul>
+			</div>
+		</nav>
+	</div>
+	<div class="v-center">
+		<div class="vc-content row">
+			<div class="col-sm-12">
+				<div class="row">
+					<div class="col-sm-12 col-md-6 col-md-offset-3">
+						<h1 class=" text-center animated fadeInDown mg-sm glow-t tc-outer-space">
+							Le Cookie Dingo de Gaga
+						</h1><img class="img-responsive center-block mg-sm animated rollIn animDelay02" src="img/Cookie.png" width="250" height="250" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="groupe" class="bgc-white bg-grey-wash-wall d-bloc bg-repeat">
+<button class="bloc bgc-white bloc-tile-1 bg-grey-wash-wall d-bloc bg-repeat text-center btn btn-d btn-glossy btn-lg" id="bouton">Ah oui, clic-moi !!!</button>
+<button class="bloc bgc-white bloc-tile-1 bg-grey-wash-wall d-bloc bg-repeat text-center btn btn-d btn-glossy btn-lg" id="multiplicateur">Bonus X x1</button>
+<button class="bloc bgc-white bloc-tile-1 bg-grey-wash-wall d-bloc bg-repeat text-center btn btn-d btn-glossy btn-lg" id="autoclick">Autoclic</button>
+<div class="bloc bgc-white bloc-tile-1 bg-grey-wash-wall d-bloc bg-repeat text-center btn btn-d btn-glossy btn-lg" id="score"></div>
+</div>
+<script>
+$bouton = document.getElementById("bouton");
+$multiplicateur = document.getElementById("multiplicateur");
+$score = document.getElementById("score");
+$autoclick = document.getElementById("autoclick");
+score = 0;
+nbMultiplicateur = 1;
+
+function afficherScore() {
+    $score.innerHTML = "Score : " + score;
+}
+
+function afficherNbMultiplicateur() {
+    $multiplicateur.innerHTML = "Bonus x" + nbMultiplicateur + " (le prochain te coutera " + prix() + " clics)";
+}
+
+function clic() {
+    score = score + nbMultiplicateur;
+    afficherScore();
+}
+
+function prix() {
+    return 10 * nbMultiplicateur * nbMultiplicateur;
+}
+
+function acheterMultiplicateur() {
+    if (score >= prix()) {
+        score = score - prix();
+        nbMultiplicateur = nbMultiplicateur + 1;
+        afficherNbMultiplicateur();
+        afficherScore();
+    } else {
+        alert("Tu reviens quand tu auras assez de clics !");
+    }
+}
+
+function autoclick() {
+    if (score >=200){
+    setInterval(clic,1000);
+    }else{
+        alert("il te faut 200 points, et tu en as seulement " + score + " !");
+    }
+}
+
+$bouton.onclick = clic;
+$multiplicateur.onclick = acheterMultiplicateur;
+$autoclick.onclick = autoclick;
+afficherScore();
+afficherNbMultiplicateur();
+</script>
